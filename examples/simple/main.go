@@ -5,6 +5,11 @@ package main
 
 import (
 	"flag"
+	"io/ioutil"
+	"os"
+	"os/signal"
+	"syscall"
+
 	"github.com/oklahomer/go-sarah"
 	"github.com/oklahomer/go-sarah/alerter/line"
 	"github.com/oklahomer/go-sarah/examples/simple/plugins/count"
@@ -19,10 +24,6 @@ import (
 	"github.com/oklahomer/go-sarah/slack"
 	"golang.org/x/net/context"
 	"gopkg.in/yaml.v2"
-	"io/ioutil"
-	"os"
-	"os/signal"
-	"syscall"
 )
 
 type myConfig struct {
@@ -43,7 +44,7 @@ func newMyConfig() *myConfig {
 }
 
 func main() {
-	var path = flag.String("config", "", "apth to apllication configuration file.")
+	var path = flag.String("config", "", "path to application configuration file.")
 	flag.Parse()
 	if *path == "" {
 		panic("./bin/examples -config=/path/to/config/app.yml")
